@@ -1,3 +1,182 @@
-# KHZstore
-My first repository
-write my note
+### Chapter 3 列表简介
+
+#### 列表是什么
+
+列表由一系列按特定顺序排列的元素组成。可以将任何东西加入列表中，其中的元素之间可以没有任何关系。鉴于列表通常包含多个元素，给列表指定一个表示复数的名称（如letters，digits）是个不错的主意。用方括号[]来表示列表，并用逗号分隔其中的元素
+
+如果将Python列表打印出来，将打印出列表的内部表示，包括方括号。
+
+```python
+animals = ['dog','cat','rabbit','snake','pig']#构造一个名为animals的列表
+print(animals)
+
+#output: ['dog','cat','rabbit','snake','pig']
+```
+
+鉴于这不是你要用户看到的输出，下面来看如何访问列表元素。
+
+##### 访问列表元素
+
+通过将该元素的位置或索引告诉Python即可。
+
+如，提取第一个动物。
+
+```python
+print(animals[0])
+
+#output: dog
+#Python只返回该元素，而不包括方括号和引号
+```
+
+##### 索引从0而不是1开始
+
+Python为访问最后一个列表元素提供了一种特殊的语法。通过将索引指定为-1。
+
+```python
+print(animals[-1])
+
+#output: pig
+```
+
+##### 使用列表中的各个值
+
+可以使用拼接根据列表中的值来创建消息。
+
+```python
+message = "My first pet is a " + animals[1] + '.'
+print(message)
+print(message.title())#将句子中的每一个单词首字母都变为大写
+
+#output: My first pet is a cat.
+#output: My First Pet Is A Cat.
+```
+
+#### 修改、添加和删除元素
+
+你创建的大多数列表都将是动态的，这意味着列表创建后，将随着程序的运行增删元素。
+
+##### 修改列表元素
+
+修改列表元素的语法与访问列表元素的语法类似。要修改列表元素，可指定列表名和要修改的元素的索引，再指定该元素的新值。
+
+```python
+animals[0] = 'tiger'
+print(animals)
+
+#output: ['tiger', 'cat', 'rabbit', 'snake', 'pig']
+```
+
+##### 在列表中添加元素
+
+1.在列表末尾添加元素
+
+方法append()将元素添加到末尾，而不影响列表中的其他所有元素。
+
+```python
+animals.append('dog')
+print(animals)
+
+#output ['tiger', 'cat', 'rabbit', 'snake', 'pig', 'dog']
+```
+
+方法append()让动态地创建列表易如反掌，例如，你可以先创建一个空列表，再使用一系列的append()语句添加元素。
+
+2.在列表中插入元素
+
+使用方法insert()可在列表的任何位置添加新元素。为此，你需要制定新元素的索引和值。这种操作将列表中既有的每个元素都右移一个位置。
+
+```python
+animals.insert(0,'horse')
+print(animals)
+
+#output: ['horse', 'dog', 'cat', 'rabbit', 'snake', 'pig']
+```
+
+##### 从列表中删除元素
+
+1.使用del语句删除元素
+
+如果知道要删除的元素在列表中的位置，可使用del语句。
+
+```python
+del animals[2]
+print(animals)
+
+#output: ['dog', 'cat', 'snake', 'pig']
+```
+
+2.使用pop()方法删除元素
+
+有时候，你要将元素从列表中删除，并接着使用它的值。方法pop()可删除列表末尾的元素，并让你能够接着使用它。术语弹出（pop）源自这样的类比：列表就像一个栈，而删除列表末尾的元素相当于弹出栈顶元素。
+
+```python
+animals_popped = animals.pop()
+print(animals_popped)
+print(animals)
+
+#output: pig
+#output: ['dog', 'cat', 'rabbit', 'snake']
+```
+
+3.弹出列表中任何位置处的元素
+
+实际上，你可以使用pop()来删除列表中任何位置的元素，只需在括号中指定要删除的元素的索引即可。
+
+```python
+first_pet = animals.pop(1)
+print("my first pet was a " + first_pet + '!')
+
+#output: my first pet was a cat!
+```
+
+4.根据值删除元素
+
+有时候，你不知道要从列表中删除的值所处的位置。如果你只知道要删除的元素的值，可使用方法remove()。
+
+```python
+animals.remove('snake')
+print(animals)
+
+#output: ['dog', 'cat', 'rabbit', 'pig']
+```
+
+注意：方法remove()只删除第一个指定的值。如果要删除的值可能在列表中出现多次，就需要使用循环来判断是否删除了所有这样的值。
+
+#### 组织列表
+
+在你创建的列表中，元素的排列顺序常常是无法预测的，因为你并非总能控制用户提供数据的顺序。有时候，你希望保留列表元素最初的排列顺序，而有时候又需要调整排列顺序。Python提供了很多组织列表的方式，可根据具体情况选用。
+
+##### 使用方法sort()对列表进行永久性排序
+
+按字母顺序排列（小写）。
+
+```python
+cars = ['bmw','audi','toyota','subaru']
+cars.sort()
+print(cars)
+
+#output: ['audi', 'bmw', 'subaru', 'toyota']
+```
+
+你还可以按与字母顺序相反的顺序排列元素，为此，只需向sort()方法传递参数reverse = True。
+
+```python
+cars.sort(reverse=True)
+print(cars)
+
+#output: ['toyota', 'subaru', 'bmw', 'audi']
+```
+
+##### 使用函数sorted()对列表进行临时排序
+
+函数sorted()让你能够按特定顺序显示列表元素，同时不影响它们在列表中的原始排列顺序。
+
+```python
+print(sorted(cars))
+print(cars)
+
+#output: ['audi', 'bmw', 'subaru', 'toyota']
+#output: ['bmw', 'audi', 'toyota', 'subaru']
+```
+
+也可向函数sorted()传递参数reverse=True。
